@@ -1,0 +1,355 @@
+<?php
+if(isset($_POST['FirstName'])){
+ $servername = "localhost";
+ $username = "root";
+ $password = "";
+ $bdname = "Pickup";
+
+ $conn = new mysqli_connect($servername,$username,$password,$bdname);
+ if (!$conn){
+    die("Connection to this database failed due to " .mysqli_connect_error());
+        }
+ //data from html
+ $FirstName = $_POST['FirstName'];
+ $LastName = $_POST['LastName'];
+ $Gmail = $_POST['Gmail'];
+ $Address1 = $_POST['Address1'];
+ $Address2 = $_POST['Address2'];
+ $Weight = $_POST['Weight'];
+ $City = $_POST['City'];
+ $State = $_POST['State'];
+ $Zip = $_POST['Zip'];
+ $Mobile = $POST['Mobile'];
+ $AlternateMobile = $POST['AlternateMobile'];
+ $PickupDate = $_POST['PickupDate'];
+
+ $sql = "INSERT into 'Pickup'.'RequestPickup'('FirstName', 'LastName', 'Gmail', 'Address1', 'Address2', 'Weight', 'City', 'State', 'Zip', 'Mobile', 'AlternateMobile', 'PickupDate')Values('$FirstName', '$LastName', '$Gmail', '$Address1', '$Address2', '$Weight', '$City', '$State', '$Zip', '$Mobile', '$AlternateMobile', '$PickupDate');";
+ echo $sql;
+ if($conn->query($sql) == true)
+ {
+    echo "Sucessfully Submitted";
+ }
+ else {
+    echo "error ".$conn->error();
+    $conn->close();
+ }
+}
+?>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <title>Requestpickup</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="http://127.0.0.1:5500/index.html">Scrap Collection</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/Requestpickup.html">Request Pickup Now <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Learn More
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/LearnMore/AboutUs.html">About Us</a>
+            <a class="dropdown-item" href="/LearnMore/ScrapRate.html">Scrap Rate</a>
+            <a class="dropdown-item" href="/LearnMore/HowItWorks.html">How It Works</a>
+            <a class="dropdown-item" href="/LearnMore/FAQs.html">FAQs</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/#">Scrap Blogs</a>
+          </div>
+        </li>
+
+
+        <li class="nav-item ">
+          <a class="nav-link" href="/Contact.html">Contact</a>
+        </li>
+
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="/#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Tie Up
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/TieUp/JoinAsVendor.html">Join As Vendor</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/TieUp/CorporateTieUp.html">Corporate Tie Up</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/TieUp/Partner.html">Partner</a>
+
+          </div>
+
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/RateCard.html">Rate Card</a>
+        </li>
+        <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="/Signup-Login.html" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Signup/Login
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="SignupLogin/SignUp.html">Signup</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="/SignupLogin/Login.html">Login</a>
+          </div>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+  <!-- <h1>Requestpickup Page</h1> -->
+  <!-- Form to fill for the pickup  -->
+  <div class='pickup' style="padding: 20px;">
+    <form action = 'connect.php' method = "POST" style="border: 2px solid gray; padding: 2%;">
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="FirstName">First name</label>
+          <input type="text" class="form-control is-valid" id="FirstName" placeholder="First name" name = 'FirstName'  required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="LastName">Last name</label>
+          <input type="text" class="form-control is-valid" id="LastName" placeholder="Last name" name = "LastName" required>
+        </div>
+        
+        <div class="col-md-4 mb-3">
+          <label for="gmail">Gmail</label>
+          <div class="input-group">
+            <input type="gmail" class="form-control is-invalid" id="Gmail" placeholder="Gmail"
+              aria-describedby="inputGroupPrepend3" name = "Gmail" required>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-3">
+          <label for="Address1">Address 1</label>
+          <input type="text" class="form-control is-invalid" id="Address1" placeholder="Address" name = "Address1" required>
+          <div class="invalid-feedback">
+            Please provide the proper address with flat number
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="Address2">Address 2</label>
+          <input type="text" class="form-control is-invalid" id="Address2" placeholder="Address"  name = 'Address2' required>
+          <div class="invalid-feedback">
+            Please provide a near landmark.
+          </div>
+        </div>
+        <div class="col-md-3 mb-3">
+          <label for="Weight">Weight Of Scrap </label>
+          <input type="number" class="form-control is-invalid" id="Weight" placeholder="weight" name = 'Weight' required>
+          <div class="invalid-feedback">
+            Weight in Kg.
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+
+        <div class="form-row">
+          <div class="col-md-6 mb-3">
+            <label for="City">City</label>
+            <input type="text" class="form-control is-invalid" id="City" placeholder="City" name = "City" required>
+            <div class="invalid-feedback">
+              Please provide a valid city.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="State">State</label>
+            <input type="text" class="form-control is-invalid" id="State" placeholder="State" name = "State" required>
+            <div class="invalid-feedback">
+              Please provide a valid state.
+            </div>
+          </div>
+
+          <div class="col-md-3 mb-3">
+            <label for="Zip">Zip</label>
+            <input type="number" class="form-control is-invalid" id="Zip" placeholder="Zip" maxlength="7" name = 'Zip' required>
+            <div class="invalid-feedback">
+              Please provide a valid zip.
+            </div>
+
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <label for="Mobile No">Mobile No:</label>
+            <input type="Number" class="form-control is-valid" id="Mobile" placeholder="Mobile Number" name = "Mobile" required>
+          </div>
+          <div class="col-md-4 mb-3" style="margin-left: 2%;">
+            <label for="Mobile No">Alternate Mobile No:</label>
+            <input type="Number" class="form-control is-valid" id="AlternateMobile" placeholder="Alternate Mobile Number" name = "AlternateMobile" >
+          </div>
+          
+
+          <div class="md-form md-outline input-with-post-icon datepicker" style="margin-left: 5%;" >
+             <label for="PickupDate">Pickup Date</label>
+            <input placeholder="Select date" type="date" id="PickupDate" class="form-control" name = "PickupDate"  min="2021-08-01" required>
+          </div> 
+          
+         
+
+        </div>
+        <div class="form-group" style='margin-left: 50%;'>
+          <div class="form-check">
+            <input class="form-check-input is-invalid" type="checkbox" value="" id="checkbox" required>
+            <label class="form-check-label" for="invalidCheck3">
+              Agree to terms and conditions
+            </label>
+            <div class="invalid-feedback">
+              You must agree before submitting.
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit" style="margin-left:50% ;" >Submit form</button>
+    </form>
+
+  </div>
+
+  <!--Footer for the the page-->
+  <!-- Footer -->
+  <footer class="page-footer font-small blue-grey lighten-5">
+
+    <div class="container">
+      <!-- Footer Links -->
+      <div class="container text-center text-md-left mt-5">
+
+        <!-- Grid row -->
+        <div class="row mt-3 dark-grey-text">
+
+
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Services</h6>
+            <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+              <a class="dark-grey-text" href="/Requestpickup.html">Scrap Pickup</a>
+            </p>
+            <p>
+              <a class="dark-grey-text" href="/TieUp/CorporateTieUp.html">Corporate Tie-up</a>
+            </p>
+            <p>
+              <a class="dark-grey-text" href="/TieUp/JoinAsVendor.html">Join as Vendor</a>
+            </p>
+
+          </div>
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Support </h6>
+            <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+              <a class="dark-grey-text" href="/Contact.html">Contact us</a>
+            </p>
+            <p>
+              <a class="dark-grey-text" href="/LearnMore/FAQs.html">Help & FAQs</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Company</h6>
+            <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+              <a class="dark-grey-text" href="/LearnMore/AboutUs.html">About us </a>
+            </p>
+            <p>
+              <a class="dark-grey-text" href="/#">Scrap Blocgs</a>
+            </p>
+          </div>
+
+          <!-- Grid column -->
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Our RateCard</h6>
+            <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+              <a class="dark-grey-text" href="/LearnMore/ScrapRate.html">ScrapRate Card</a>
+            </p>
+            <p>
+              <a class="dark-grey-text" href="/LearnMore/ScrapRate.html">ScrapRate Calculator</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+
+            <!-- Links -->
+            <h6 class="text-uppercase font-weight-bold">Contact</h6>
+            <hr class="teal accent-3 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+            <p>
+              <i class="fas fa-home mr-3"></i> Uttar Pradesh, 201003 , India
+            </p>
+            <p>
+              <i class="fas fa-envelope mr-3"></i> mohdrustam001@gmail.com
+            </p>
+            <p>
+              <i class="fas fa-envelope mr-3"></i> wasimwani98@gmail.com
+            </p>
+
+            <p>
+              <i class="fas fa-phone mr-3"></i> +91 741 7200 362
+            </p>
+            <p>
+              <i class="fas fa-print mr-3"></i> +91 600 5799 477
+            </p>
+
+          </div>
+
+
+        </div>
+        <!-- Grid row -->
+
+      </div>
+
+      <!-- Footer Links -->
+    </div>
+
+
+  </footer>
+  <!-- Footer -->
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
+

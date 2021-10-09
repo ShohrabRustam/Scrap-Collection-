@@ -1,0 +1,65 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.logo{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo img{
+    width: 33%;
+    border: 3px solid white;
+    border-radius: 50%;
+}
+.navbar{
+    display: flex;
+}
+
+.nav-list
+{
+width: 50%;
+
+display: flex;
+align-items: center;
+
+}
+
+.nav-list li{
+    list-style: none;
+    padding:23px 34px;
+
+}
+
+.nav-list li a{
+    text-decoration: none;
+    color: white;
+
+}
+
+.rightnav{
+    
+    width: 50%;
+    text-align: right;
+}
+
+#search{
+    padding: 5px;
+    font-size: 17px;
+    border:2px solid grey;
+    border-radius: 9px;
+    
+}
+
+.background{
+    background: rgba(0, 0, 0, 0.7);
+    background-size: cover;
+    background-blend-mode: darken;
+}
+body{
+    width: 100%;
+
+}
